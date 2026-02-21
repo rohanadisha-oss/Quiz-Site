@@ -1,343 +1,782 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Smart Quiz – Professional PDF</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>বাংলা নবজাগরণ কুইজ - ফুলবাড়ি আমিনিয়া হাই মাদ্রাসা(উঃ মাঃ)</title>
+    <style>
+        /* Base Styles & Global Resets */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-<style>
-body{
-  font-family:"Noto Sans Bengali","SolaimanLipi","Arial",sans-serif;
-  background:#eef2f7;
-  padding:10px;
-}
+        :root {
+            --primary-color: #6a11cb;
+            --secondary-color: #2575fc;
+            --text-color: #333;
+            --light-text-color: #f4f4f4;
+            --bg-light: #ffffff;
+            --bg-dark: #f0f2f5;
+            --shadow-light: rgba(0, 0, 0, 0.1);
+            --shadow-medium: rgba(0, 0, 0, 0.2);
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --warning-color: #ffc107;
+            --border-radius: 10px;
+            --font-family: 'Arial', sans-serif; /* Fallback to common sans-serif */
+        }
 
-/* Common Box */
-.box{
-  background:#fff;
-  padding:15px;
-  border-radius:12px;
-  margin-bottom:12px;
-  box-shadow:0 4px 10px rgba(0,0,0,.1);
-}
+        /* Bengali Font - Google Fonts (if external fonts were allowed, this would be linked) */
+        /* Since all CSS must be inside, we stick to system fonts. */
+        /* For better Bengali display, a font like 'Noto Sans Bengali' would be ideal */
 
-textarea,input{
-  width:100%;
-  padding:8px;
-  margin-bottom:8px;
-}
+        body {
+            font-family: var(--font-family);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
 
-/* Smart Options */
-.option{
-  padding:12px;
-  background:#eef1f7;
-  margin:8px 0;
-  border-radius:8px;
-  cursor:pointer;
-  border:2px solid transparent;
-  transition:.2s;
-}
-.option:hover{background:#dde3f0}
+        .container {
+            background-color: var(--bg-light);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px var(--shadow-medium);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            animation: fadeIn 0.8s ease-out;
+        }
 
-.correct{
-  background:#2ecc71 !important;
-  color:#fff;
-  border-color:#27ae60;
-}
-.wrong{
-  background:#e74c3c !important;
-  color:#fff;
-  border-color:#c0392b;
-}
-.disabled{
-  pointer-events:none;
-  opacity:0.9;
-}
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-/* Buttons */
-button{
-  padding:10px;
-  width:100%;
-  border:none;
-  border-radius:8px;
-  background:#1e88e5;
-  color:white;
-  margin-top:6px;
-}
-.hide{display:none}
+        h1, h2, h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
 
-.top{
-  display:flex;
-  justify-content:space-between;
-  font-size:14px;
-}
+        h1 {
+            font-size: 2.2em;
+            font-weight: 700;
+        }
 
-/* ===== Professional PDF Style ===== */
-.result-sheet{
-  max-width:520px;
-  margin:auto;
-  border:1.5px solid #000;
-  padding:20px;
-}
+        h2 {
+            font-size: 1.8em;
+            font-weight: 600;
+        }
 
-.result-header{
-  text-align:center;
-  border-bottom:2px solid #000;
-  margin-bottom:15px;
-}
+        h3 {
+            font-size: 1.4em;
+            font-weight: 500;
+        }
 
-.result-header h2{
-  margin:0;
-  font-size:22px;
-}
+        p {
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
 
-.result-header p{
-  margin:4px 0 0;
-  font-size:14px;
-}
+        .header-info {
+            background-color: var(--secondary-color);
+            color: var(--light-text-color);
+            padding: 15px 20px;
+            border-radius: var(--border-radius);
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px var(--shadow-light);
+        }
 
-.student-info{
-  display:flex;
-  justify-content:space-between;
-  margin:15px 0;
-  font-size:15px;
-}
+        .header-info h1 {
+            color: var(--light-text-color);
+            margin-bottom: 5px;
+        }
 
-.score-table{
-  width:100%;
-  border-collapse:collapse;
-  margin-top:10px;
-  font-size:15px;
-}
+        .header-info p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
 
-.score-table th,
-.score-table td{
-  border:1px solid #000;
-  padding:10px;
-  text-align:center;
-}
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
 
-.score-table th{
-  background:#f0f0f0;
-}
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-color);
+            font-size: 1.05em;
+        }
 
-.result-footer{
-  margin-top:20px;
-  text-align:right;
-  font-size:13px;
-}
+        .form-group input[type="text"],
+        .form-group input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: var(--border-radius);
+            font-size: 1em;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
 
-/* Print */
-@media print{
-  body{background:#fff}
-  button,.no-print{display:none}
-  .box{box-shadow:none}
-}
-</style>
+        .form-group input[type="text"]:focus,
+        .form-group input[type="number"]:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.2);
+            outline: none;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: var(--light-text-color);
+            padding: 14px 25px;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px var(--shadow-light);
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px var(--shadow-medium);
+            opacity: 0.95;
+        }
+
+        .btn-secondary {
+            background: var(--bg-dark);
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            margin-top: 15px;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: var(--light-text-color);
+            border-color: var(--primary-color);
+        }
+
+        .quiz-section {
+            display: none;
+            text-align: left;
+        }
+
+        .question-container {
+            background-color: var(--bg-dark);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px var(--shadow-light);
+        }
+
+        .question-text {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            color: var(--text-color);
+            font-weight: 600;
+        }
+
+        .options-container label {
+            display: block;
+            background-color: var(--bg-light);
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+            position: relative;
+            padding-left: 45px; /* Space for custom radio button */
+        }
+
+        .options-container label:hover {
+            background-color: #f8f8f8;
+            border-color: var(--secondary-color);
+        }
+
+        .options-container input[type="radio"] {
+            display: none;
+        }
+
+        /* Custom Radio Button Styling */
+        .options-container label::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            background-color: var(--bg-light);
+            transition: all 0.3s ease;
+        }
+
+        .options-container input[type="radio"]:checked + label::before {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .options-container input[type="radio"]:checked + label::after {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 10px;
+            height: 10px;
+            background-color: var(--light-text-color);
+            border-radius: 50%;
+        }
+        /* End Custom Radio Button Styling */
+
+        .timer {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--danger-color);
+            margin-bottom: 20px;
+            background-color: var(--warning-color);
+            padding: 10px 15px;
+            border-radius: var(--border-radius);
+            display: inline-block;
+            box-shadow: 0 2px 8px var(--shadow-light);
+        }
+
+        .submit-btn-container {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .result-screen {
+            display: none;
+            text-align: center;
+        }
+
+        .result-sheet {
+            background-color: var(--bg-dark);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 6px 20px var(--shadow-medium);
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .result-sheet h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px dashed #ddd;
+            font-size: 1.1em;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-item span:first-child {
+            font-weight: 600;
+        }
+
+        .grade {
+            font-size: 2em;
+            font-weight: 700;
+            margin-top: 20px;
+            color: var(--primary-color);
+            text-shadow: 1px 1px 2px var(--shadow-light);
+        }
+
+        .correct-answer-highlight {
+            background-color: var(--success-color) !important;
+            color: var(--light-text-color);
+            border-color: var(--success-color) !important;
+        }
+
+        .wrong-answer-highlight {
+            background-color: var(--danger-color) !important;
+            color: var(--light-text-color);
+            border-color: var(--danger-color) !important;
+        }
+
+        .explanation {
+            font-size: 0.9em;
+            color: var(--light-text-color);
+            margin-top: 5px;
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .error-message {
+            color: var(--danger-color);
+            margin-top: -10px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-align: left;
+            font-size: 0.95em;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            .header-info {
+                padding: 12px 15px;
+            }
+
+            .header-info h1 {
+                font-size: 1.6em;
+            }
+
+            .header-info p {
+                font-size: 0.95em;
+            }
+
+            .btn {
+                padding: 12px 20px;
+                font-size: 1.1em;
+            }
+
+            .question-text {
+                font-size: 1.1em;
+            }
+
+            .options-container label {
+                padding: 12px 15px 12px 40px;
+                font-size: 0.95em;
+            }
+
+            .options-container label::before {
+                width: 18px;
+                height: 18px;
+                left: 10px;
+            }
+
+            .options-container input[type="radio"]:checked + label::after {
+                width: 8px;
+                height: 8px;
+                left: 16px;
+            }
+
+            .timer {
+                font-size: 1.1em;
+            }
+            .result-sheet {
+                padding: 20px;
+            }
+            .result-item {
+                font-size: 1em;
+            }
+            .grade {
+                font-size: 1.6em;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: none;
+                display: block;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+                max-width: none;
+                width: auto;
+                margin: 0;
+                padding: 0;
+            }
+            .header-info, .quiz-section, .start-screen, .btn, .error-message, .timer {
+                display: none !important;
+            }
+            .result-screen {
+                display: block !important;
+                position: static !important;
+                width: 100% !important;
+                background-color: white;
+                color: black;
+                padding: 20px;
+            }
+            .result-sheet {
+                box-shadow: none;
+                border: 1px solid #eee;
+                background-color: white;
+            }
+            .result-sheet h2 {
+                color: #333;
+            }
+            .result-item {
+                border-bottom: 1px solid #eee;
+            }
+            h1, h2, h3, p, span {
+                color: black !important;
+            }
+        }
+
+    </style>
 </head>
-
 <body>
+    <div class="container">
+        <!-- School Header -->
+        <div class="header-info">
+            <h1>ফুলবাড়ি এ.এইচ. মাদ্রাসা</h1>
+            <p>শ্রেণী: অষ্টম | বিষয়: বাংলা</p>
+        </div>
 
-<!-- STEP 1 : QUESTION INPUT -->
-<div class="box" id="questionBox">
-<h3>🤖 AI Question Paste</h3>
-<textarea id="aiText" placeholder="
-Q: প্রশ্ন
-A) অপশন ১
-B) অপশন ২
-C) অপশন ৩
-D) অপশন ৪
-Ans: A
-"></textarea>
-<button onclick="processQuestions()">Question Ready</button>
-</div>
+        <!-- Start Screen -->
+        <section id="start-screen">
+            <h2>কুইজে স্বাগতম!</h2>
+            <p>আপনার নাম এবং রোল নম্বর প্রবেশ করে কুইজ শুরু করুন।</p>
 
-<!-- STEP 2 : STUDENT INFO -->
-<div class="box hide" id="studentBox">
-<h3>👤 Student Information</h3>
-<input id="studentName" placeholder="Student Name">
-<input id="rollNo" placeholder="Roll Number">
-<button onclick="startQuiz()">Start Quiz</button>
-</div>
+            <div class="form-group">
+                <label for="studentName">শিক্ষার্থীর নাম:</label>
+                <input type="text" id="studentName" placeholder="আপনার পুরো নাম লিখুন" required>
+                <div id="name-error" class="error-message" style="display: none;">শিক্ষার্থীর নাম আবশ্যক।</div>
+            </div>
 
-<!-- STEP 3 : QUIZ -->
-<div class="box hide" id="quizBox">
-<div class="top">
-  <span id="count"></span>
-  <span id="timer"></span>
-</div>
+            <div class="form-group">
+                <label for="rollNumber">রোল নম্বর:</label>
+                <input type="number" id="rollNumber" placeholder="আপনার রোল নম্বর লিখুন" required>
+                <div id="roll-error" class="error-message" style="display: none;">রোল নম্বর আবশ্যক।</div>
+            </div>
 
-<h3 id="question"></h3>
-<div id="options"></div>
+            <button class="btn" id="startQuizBtn">কুইজ শুরু করুন</button>
+        </section>
 
-<button onclick="next()">পরবর্তী প্রশ্ন</button>
-</div>
+        <!-- Quiz Screen -->
+        <section id="quiz-screen" class="quiz-section">
+            <p class="timer" id="quizTimer">সময়: 15:00</p>
+            <div id="questions-container">
+                <!-- Questions will be dynamically loaded here -->
+            </div>
+            <div class="submit-btn-container">
+                <button class="btn" id="submitQuizBtn">জমা দিন</button>
+            </div>
+        </section>
 
-<!-- STEP 4 : RESULT + PDF -->
-<div class="box hide" id="resultBox">
-<h3 style="text-align:center">📊 Examination Result</h3>
+        <!-- Result Screen -->
+        <section id="result-screen" class="result-screen">
+            <h2>কুইজের ফলাফল</h2>
+            <div class="result-sheet">
+                <div class="result-item">
+                    <span>শিক্ষার্থীর নাম:</span> <span id="displayStudentName"></span>
+                </div>
+                <div class="result-item">
+                    <span>রোল নম্বর:</span> <span id="displayRollNumber"></span>
+                </div>
+                <div class="result-item">
+                    <span>মোট প্রশ্ন:</span> <span id="totalQuestions"></span>
+                </div>
+                <div class="result-item">
+                    <span>মোট নম্বর:</span> <span id="totalMarks"></span>
+                </div>
+                <div class="result-item">
+                    <span>প্রাপ্ত নম্বর:</span> <span id="obtainedMarks"></span>
+                </div>
+                <div class="result-item">
+                    <span>শতাংশ:</span> <span id="percentage"></span>
+                </div>
+                <div class="result-item">
+                    <span>গ্রেড:</span> <span id="grade" class="grade"></span>
+                </div>
+            </div>
+            <button class="btn" id="downloadPdfBtn">ফলাফল PDF ডাউনলোড করুন</button>
+            <button class="btn btn-secondary" id="retryQuizBtn">আবার কুইজ দিন</button>
+        </section>
+    </div>
 
-<div id="printArea" class="result-sheet">
+    <script>
+        const quizData = [
+            {
+                question: "বাংলার নবজাগরণের সময়কাল কত ছিল?",
+                options: ["অষ্টাদশ শতক", "ঊনবিংশ শতক", "বিংশ শতক", "সপ্তদশ শতক"],
+                correctAnswerIndex: 1
+            },
+            {
+                question: "বাংলা নবজাগরণের প্রতিকৃত কাকে বলা হয়?",
+                options: ["রবীন্দ্রনাথ ঠাকুর", "ঈশ্বরচন্দ্র বিদ্যাসাগর", "রাজা রামমোহন রায়", "স্বামী বিবেকানন্দ"],
+                correctAnswerIndex: 2
+            },
+            {
+                question: "সতীদাহ প্রথা রদ হয় কার প্রচেষ্টায়?",
+                options: ["হেনরি লুই ভিভিয়ান ডিরোজিও", "ঈশ্বরচন্দ্র বিদ্যাসাগর", "রাজা রামমোহন রায়", "দেবেন্দ্রনাথ ঠাকুর"],
+                correctAnswerIndex: 2
+            },
+            {
+                question: "বিধবা বিবাহ আইন প্রবর্তন হয় কার উদ্যোগে?",
+                options: ["রামমোহন রায়", "বিদ্যাসাগর", "বঙ্কিমচন্দ্র চট্টোপাধ্যায়", "মাইকেল মধুসূদন দত্ত"],
+                correctAnswerIndex: 1
+            },
+            {
+                question: "ইয়ং বেঙ্গল গোষ্ঠী কাদের নেতৃত্বে গড়ে উঠেছিল?",
+                options: ["দেবেন্দ্রনাথ ঠাকুর", "ডিরোজিও", "রামকৃষ্ণ পরমহংস", "স্বামী বিবেকানন্দ"],
+                correctAnswerIndex: 1
+            },
+            {
+                question: "তত্ত্ববোধিনী সভা কে প্রতিষ্ঠা করেন?",
+                options: ["রামমোহন রায়", "ঈশ্বরচন্দ্র বিদ্যাসাগর", "দেবেন্দ্রনাথ ঠাকুর", "অক্ষয়কুমার দত্ত"],
+                correctAnswerIndex: 2
+            },
+            {
+                question: "'নীলদর্পণ' নাটকের রচয়িতা কে?",
+                options: ["মাইকেল মধুসূদন দত্ত", "দীনবন্ধু মিত্র", "বঙ্কিমচন্দ্র চট্টোপাধ্যায়", "রবীন্দ্রনাথ ঠাকুর"],
+                correctAnswerIndex: 1
+            },
+            {
+                question: "বাংলার নবজাগরণকে 'একক মানবতাবাদ' আখ্যা দিয়েছেন কে?",
+                options: ["সুপ্রকাশ রায়", "বিনয় ঘোষ", "সুমিত সরকার", "রজনীপাম দত্ত"],
+                correctAnswerIndex: 1
+            },
+            {
+                question: "শিক্ষা বিস্তারে 'চুইয়ে পড়া নীতি' (Downward Filtration Theory) কে চালু করেন?",
+                options: ["লর্ড বেন্টিঙ্ক", "লর্ড মেকলে", "লর্ড ডালহৌসি", "উইলিয়াম কেরি"],
+                correctAnswerIndex: 1
+            },
+            {
+                question: "'বঙ্গদর্শন' পত্রিকা কে প্রকাশ করেন?",
+                options: ["ঈশ্বরচন্দ্র বিদ্যাসাগর", "রবীন্দ্রনাথ ঠাকুর", "বঙ্কিমচন্দ্র চট্টোপাধ্যায়", "শরৎচন্দ্র চট্টোপাধ্যায়"],
+                correctAnswerIndex: 2
+            }
+        ];
 
-  <div class="result-header">
-    <h2>FULBARI AMINIA HIGH MADRASAH(H.S)</h2>
-    <p>Student Score Sheet</p>
-  </div>
+        const totalQuestions = quizData.length;
+        const marksPerQuestion = 1;
+        const timeLimitMinutes = 15;
+        let timeRemaining = timeLimitMinutes * 60;
+        let timerInterval;
+        let studentName = '';
+        let rollNumber = '';
+        let userAnswers = new Array(totalQuestions).fill(null); // To store user's selected option index for each question
 
-  <div class="student-info">
-    <p><b>Name:</b> <span id="rName"></span></p>
-    <p><b>Roll:</b> <span id="rRoll"></span></p>
-  </div>
+        const startScreen = document.getElementById('start-screen');
+        const quizScreen = document.getElementById('quiz-screen');
+        const resultScreen = document.getElementById('result-screen');
+        const startQuizBtn = document.getElementById('startQuizBtn');
+        const submitQuizBtn = document.getElementById('submitQuizBtn');
+        const retryQuizBtn = document.getElementById('retryQuizBtn');
+        const downloadPdfBtn = document.getElementById('downloadPdfBtn');
+        const studentNameInput = document.getElementById('studentName');
+        const rollNumberInput = document.getElementById('rollNumber');
+        const nameError = document.getElementById('name-error');
+        const rollError = document.getElementById('roll-error');
+        const questionsContainer = document.getElementById('questions-container');
+        const quizTimer = document.getElementById('quizTimer');
 
-  <table class="score-table">
-    <tr>
-      <th>Total Questions</th>
-      <th>Correct</th>
-      <th>Wrong</th>
-      <th>Total Score</th>
-    </tr>
-    <tr>
-      <td id="tq"></td>
-      <td id="rCorrect"></td>
-      <td id="rWrong"></td>
-      <td id="rScore"></td>
-    </tr>
-  </table>
+        startQuizBtn.addEventListener('click', startQuiz);
+        submitQuizBtn.addEventListener('click', submitQuiz);
+        retryQuizBtn.addEventListener('click', retryQuiz);
+        downloadPdfBtn.addEventListener('click', downloadResultPDF);
 
-  <div class="result-footer">
-    Date: <span id="rDate"></span>
-  </div>
+        function startQuiz() {
+            studentName = studentNameInput.value.trim();
+            rollNumber = rollNumberInput.value.trim();
 
-</div>
+            let isValid = true;
+            if (studentName === '') {
+                nameError.style.display = 'block';
+                isValid = false;
+            } else {
+                nameError.style.display = 'none';
+            }
 
-<button onclick="window.print()">📄 Save as PDF</button>
-<button class="no-print" onclick="restart()" style="background:#2d2b6f">
-🔁 Next Student
-</button>
-</div>
+            if (rollNumber === '') {
+                rollError.style.display = 'block';
+                isValid = false;
+            } else {
+                rollError.style.display = 'none';
+            }
 
-<script>
-let quiz=[],i=0,score=0,time=0,interval,lock=false;
-let student={};
+            if (!isValid) {
+                return;
+            }
 
-/* ---------- Process Questions ---------- */
-function processQuestions(){
- quiz=[];
- let t=aiText.value.trim();
- if(!t) return alert("প্রশ্ন পেস্ট করুন");
+            startScreen.style.display = 'none';
+            quizScreen.style.display = 'block';
+            displayQuestions();
+            startTimer();
+        }
 
- t.split("\n\n").forEach(b=>{
-  let l=b.split("\n");
-  if(l.length<6) return;
-  quiz.push({
-    q:l[0].replace("Q:","").trim(),
-    options:[
-      l[1].replace("A)","").trim(),
-      l[2].replace("B)","").trim(),
-      l[3].replace("C)","").trim(),
-      l[4].replace("D)","").trim()
-    ],
-    ans:"ABCD".indexOf(l[5].replace("Ans:","").trim())
-  });
- });
+        function displayQuestions() {
+            questionsContainer.innerHTML = '';
+            quizData.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.classList.add('question-container');
+                questionDiv.innerHTML = `
+                    <p class="question-text">প্রশ্ন ${index + 1}: ${q.question}</p>
+                    <div class="options-container" id="options-${index}">
+                        ${q.options.map((option, optIndex) => `
+                            <input type="radio" id="q${index}-option${optIndex}" name="question${index}" value="${optIndex}" onchange="selectAnswer(${index}, ${optIndex})">
+                            <label for="q${index}-option${optIndex}">${String.fromCharCode(2437 + optIndex)} ${option}</label>
+                        `).join('')}
+                    </div>
+                `;
+                questionsContainer.appendChild(questionDiv);
 
- if(!quiz.length) return alert("Format ভুল");
+                // Restore previous selections if any (for retry)
+                if (userAnswers[index] !== null) {
+                    const selectedInput = document.getElementById(`q${index}-option${userAnswers[index]}`);
+                    if (selectedInput) {
+                        selectedInput.checked = true;
+                    }
+                }
+            });
+        }
 
- questionBox.classList.add("hide");
- studentBox.classList.remove("hide");
-}
+        function selectAnswer(questionIndex, optionIndex) {
+            userAnswers[questionIndex] = optionIndex;
+        }
 
-/* ---------- Start Quiz ---------- */
-function startQuiz(){
- if(!studentName.value || !rollNo.value)
-   return alert("Name ও Roll দিন");
+        function startTimer() {
+            timeRemaining = timeLimitMinutes * 60;
+            updateTimerDisplay();
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                updateTimerDisplay();
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    submitQuiz(true); // Submit automatically when time runs out
+                }
+            }, 1000);
+        }
 
- student={name:studentName.value,roll:rollNo.value};
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeRemaining / 60);
+            const seconds = timeRemaining % 60;
+            quizTimer.textContent = `সময়: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
 
- studentBox.classList.add("hide");
- quizBox.classList.remove("hide");
+        function submitQuiz(timeExpired = false) {
+            clearInterval(timerInterval);
+            let score = 0;
+            quizData.forEach((q, index) => {
+                if (userAnswers[index] === q.correctAnswerIndex) {
+                    score++;
+                }
+            });
 
- i=0; score=0;
- startTimer();
- load();
-}
+            displayResults(score);
+            highlightAnswers();
+            quizScreen.style.display = 'none';
+            resultScreen.style.display = 'block';
 
-/* ---------- Timer ---------- */
-function startTimer(){
- time=0;
- clearInterval(interval);
- interval=setInterval(()=>{
-  time++;
-  timer.innerText="⏱ "+time+"s";
- },1000);
-}
+            if (timeExpired) {
+                alert('দুঃখিত, আপনার সময় শেষ হয়ে গেছে! আপনার উত্তর জমা দেওয়া হয়েছে।');
+            }
+        }
 
-/* ---------- Load Question ---------- */
-function load(){
- lock=false;
- count.innerText=`Q ${i+1}/${quiz.length}`;
- question.innerText=quiz[i].q;
- options.innerHTML="";
+        function calculateGrade(percentage) {
+            if (percentage >= 90) return 'A+';
+            if (percentage >= 80) return 'A';
+            if (percentage >= 70) return 'B';
+            if (percentage >= 60) return 'C';
+            if (percentage >= 50) return 'D';
+            return 'F';
+        }
 
- quiz[i].options.forEach((o,idx)=>{
-  let d=document.createElement("div");
-  d.className="option";
-  d.innerText=o;
-  d.onclick=()=>selectOption(d,idx);
-  options.appendChild(d);
- });
-}
+        function displayResults(score) {
+            const totalPossibleMarks = totalQuestions * marksPerQuestion;
+            const percentage = (score / totalPossibleMarks) * 100;
+            const grade = calculateGrade(percentage);
 
-/* ---------- Smart Select ---------- */
-function selectOption(el,idx){
- if(lock) return;
- lock=true;
+            document.getElementById('displayStudentName').textContent = studentName;
+            document.getElementById('displayRollNumber').textContent = rollNumber;
+            document.getElementById('totalQuestions').textContent = totalQuestions;
+            document.getElementById('totalMarks').textContent = totalPossibleMarks;
+            document.getElementById('obtainedMarks').textContent = score;
+            document.getElementById('percentage').textContent = percentage.toFixed(2) + '%';
+            document.getElementById('grade').textContent = grade;
+        }
 
- const correctIndex=quiz[i].ans;
- const opts=document.querySelectorAll(".option");
+        function highlightAnswers() {
+            quizData.forEach((q, index) => {
+                const optionsContainer = document.getElementById(`options-${index}`);
+                const selectedOptionIndex = userAnswers[index];
+                const correctAnswerIndex = q.correctAnswerIndex;
 
- opts.forEach((o,i2)=>{
-  o.classList.add("disabled");
-  if(i2===correctIndex) o.classList.add("correct");
- });
+                if (optionsContainer) {
+                    // Disable all radio buttons
+                    const radioButtons = optionsContainer.querySelectorAll(`input[name="question${index}"]`);
+                    radioButtons.forEach(radio => radio.disabled = true);
 
- if(idx!==correctIndex){
-  el.classList.add("wrong");
- }else{
-  score++;
- }
-}
+                    // Highlight correct answer
+                    const correctLabel = optionsContainer.querySelector(`label[for="q${index}-option${correctAnswerIndex}"]`);
+                    if (correctLabel) {
+                        correctLabel.classList.add('correct-answer-highlight');
+                        // Add checkmark for correct
+                        correctLabel.innerHTML += `<span style="margin-left: 10px; font-weight: bold;">&#x2714;</span>`;
+                    }
 
-/* ---------- Next ---------- */
-function next(){
- i++;
- if(i>=quiz.length){ endQuiz(); return; }
- load();
-}
+                    // Highlight user's selected answer if wrong
+                    if (selectedOptionIndex !== null && selectedOptionIndex !== correctAnswerIndex) {
+                        const wrongLabel = optionsContainer.querySelector(`label[for="q${index}-option${selectedOptionIndex}"]`);
+                        if (wrongLabel) {
+                            wrongLabel.classList.add('wrong-answer-highlight');
+                            // Add cross mark for wrong
+                            wrongLabel.innerHTML += `<span style="margin-left: 10px; font-weight: bold;">&#x2718;</span>`;
+                        }
+                    }
+                }
+            });
+        }
 
-/* ---------- End Quiz ---------- */
-function endQuiz(){
- clearInterval(interval);
- quizBox.classList.add("hide");
- resultBox.classList.remove("hide");
+        function retryQuiz() {
+            // Reset state
+            userAnswers.fill(null);
+            studentNameInput.value = '';
+            rollNumberInput.value = '';
+            timeRemaining = timeLimitMinutes * 60;
+            clearInterval(timerInterval);
 
- document.getElementById("rName").innerText = student.name;
- document.getElementById("rRoll").innerText = student.roll;
- document.getElementById("rScore").innerText = score;
- document.getElementById("rCorrect").innerText = score;
- document.getElementById("rWrong").innerText = quiz.length - score;
- document.getElementById("tq").innerText = quiz.length;
- document.getElementById("rDate").innerText = new Date().toLocaleDateString();
-}
+            // Hide result screen, show start screen
+            resultScreen.style.display = 'none';
+            startScreen.style.display = 'block';
+            nameError.style.display = 'none';
+            rollError.style.display = 'none';
 
-/* ---------- Restart ---------- */
-function restart(){
- resultBox.classList.add("hide");
- studentName.value="";
- rollNo.value="";
- studentBox.classList.remove("hide");
-}
-</script>
+            // Clear highlights (will happen naturally as questions are re-rendered)
+        }
 
+        function downloadResultPDF() {
+            // Use browser's print functionality to save as PDF
+            window.print();
+        }
+
+        // Initial display
+        startScreen.style.display = 'block';
+        quizScreen.style.display = 'none';
+        resultScreen.style.display = 'none';
+
+    </script>
 </body>
 </html>
