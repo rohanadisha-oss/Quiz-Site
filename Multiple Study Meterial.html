@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Smart Quiz – Professional PDF</title>
+
+<style>
+body{
+  font-family:"Noto Sans Bengali","SolaimanLipi","Arial",sans-serif;
+  background:#eef2f7;
+  padding:10px;
+}
+
+/* Common Box */
+.box{
+  background:#fff;
+  padding:15px;
+  border-radius:12px;
+  margin-bottom:12px;
+  box-shadow:0 4px 10px rgba(0,0,0,.1);
+}
+
+textarea,input{
+  width:100%;
+  padding:8px;
+  margin-bottom:8px;
+}
+
+/* Smart Options */
+.option{
+  padding:12px;
+  background:#eef1f7;
+  margin:8px 0;
+  border-radius:8px;
+  cursor:pointer;
+  border:2px solid transparent;
+  transition:.2s;
+}
+.option:hover{background:#dde3f0}
+
+.correct{
+  background:#2ecc71 !important;
+  color:#fff;
+  border-color:#27ae60;
+}
+.wrong{
+  background:#e74c3c !important;
+  color:#fff;
+  border-color:#c0392b;
+}
+.disabled{
+  pointer-events:none;
+  opacity:0.9;
+}
+
+/* Buttons */
+button{
+  padding:10px;
+  width:100%;
+  border:none;
+  border-radius:8px;
+  background:#1e88e5;
+  color:white;
+  margin-top:6px;
+}
+.hide{display:none}
+
+.top{
+  display:flex;
+  justify-content:space-between;
+  font-size:14px;
+}
+
+/* ===== Professional PDF Style ===== */
+.result-sheet{
+  max-width:520px;
+  margin:auto;
+  border:1.5px solid #000;
+  padding:20px;
+}
+
+.result-header{
+  text-align:center;
+  border-bottom:2px solid #000;
+  margin-bottom:15px;
+}
+
+.result-header h2{
+  margin:0;
+  font-size:22px;
+}
+
+.result-header p{
+  margin:4px 0 0;
+  font-size:14px;
+}
+
+.student-info{
+  display:flex;
+  justify-content:space-between;
+  margin:15px 0;
+  font-size:15px;
+}
+
+.score-table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:10px;
+  font-size:15px;
+}
+
+.score-table th,
+.score-table td{
+  border:1px solid #000;
+  padding:10px;
+  text-align:center;
+}
+
+.score-table th{
+  background:#f0f0f0;
+}
+
+.result-footer{
+  margin-top:20px;
+  text-align:right;
+  font-size:13px;
+}
+
+/* Print */
+@media print{
+  body{background:#fff}
+  button,.no-print{display:none}
+  .box{box-shadow:none}
+}
+</style>
+</head>
+
+<body>
+
+<!-- STEP 1 : QUESTION INPUT -->
+<div class="box" id="questionBox">
+<h3>🤖 AI Question Paste</h3>
+<textarea id="aiText" placeholder="
+Q: প্রশ্ন
+A) অপশন ১
+B) অপশন ২
+C) অপশন ৩
+D) অপশন ৪
+Ans: A
+"></textarea>
+<button onclick="processQuestions()">Question Ready</button>
+</div>
+
+<!-- STEP 2 : STUDENT INFO -->
+<div class="box hide" id="studentBox">
+<h3>👤 Student Information</h3>
+<input id="studentName" placeholder="Student Name">
+<input id="rollNo" placeholder="Roll Number">
+<button onclick="startQuiz()">Start Quiz</button>
+</div>
+
+<!-- STEP 3 : QUIZ -->
+<div class="box hide" id="quizBox">
+<div class="top">
+  <span id="count"></span>
+  <span id="timer"></span>
+</div>
+
+<h3 id="question"></h3>
+<div id="options"></div>
+
+<button onclick="next()">পরবর্তী প্রশ্ন</button>
+</div>
+
+<!-- STEP 4 : RESULT + PDF -->
+<div class="box hide" id="resultBox">
+<h3 style="text-align:center">📊 Examination Result</h3>
+
+<div id="printArea" class="result-sheet">
+
+  <div class="result-header">
+    <h2>FULBARI AMINIA HIGH MADRASAH(H.S)</h2>
+    <p>Student Score Sheet</p>
+  </div>
+
+  <div class="student-info">
+    <p><b>Name:</b> <span id="rName"></span></p>
+    <p><b>Roll:</b> <span id="rRoll"></span></p>
+  </div>
+
+  <table class="score-table">
+    <tr>
+      <th>Total Questions</th>
+      <th>Correct</th>
+      <th>Wrong</th>
+      <th>Total Score</th>
+    </tr>
+    <tr>
+      <td id="tq"></td>
+      <td id="rCorrect"></td>
+      <td id="rWrong"></td>
+      <td id="rScore"></td>
+    </tr>
+  </table>
+
+  <div class="result-footer">
+    Date: <span id="rDate"></span>
+  </div>
+
+</div>
+
+<button onclick="window.print()">📄 Save as PDF</button>
+<button class="no-print" onclick="restart()" style="background:#2d2b6f">
+🔁 Next Student
+</button>
+</div>
+
+<script>
+let quiz=[],i=0,score=0,time=0,interval,lock=false;
+let student={};
+
+/* ---------- Process Questions ---------- */
+function processQuestions(){
+ quiz=[];
+ let t=aiText.value.trim();
+ if(!t) return alert("প্রশ্ন পেস্ট করুন");
+
+ t.split("\n\n").forEach(b=>{
+  let l=b.split("\n");
+  if(l.length<6) return;
+  quiz.push({
+    q:l[0].replace("Q:","").trim(),
+    options:[
+      l[1].replace("A)","").trim(),
+      l[2].replace("B)","").trim(),
+      l[3].replace("C)","").trim(),
+      l[4].replace("D)","").trim()
+    ],
+    ans:"ABCD".indexOf(l[5].replace("Ans:","").trim())
+  });
+ });
+
+ if(!quiz.length) return alert("Format ভুল");
+
+ questionBox.classList.add("hide");
+ studentBox.classList.remove("hide");
+}
+
+/* ---------- Start Quiz ---------- */
+function startQuiz(){
+ if(!studentName.value || !rollNo.value)
+   return alert("Name ও Roll দিন");
+
+ student={name:studentName.value,roll:rollNo.value};
+
+ studentBox.classList.add("hide");
+ quizBox.classList.remove("hide");
+
+ i=0; score=0;
+ startTimer();
+ load();
+}
+
+/* ---------- Timer ---------- */
+function startTimer(){
+ time=0;
+ clearInterval(interval);
+ interval=setInterval(()=>{
+  time++;
+  timer.innerText="⏱ "+time+"s";
+ },1000);
+}
+
+/* ---------- Load Question ---------- */
+function load(){
+ lock=false;
+ count.innerText=`Q ${i+1}/${quiz.length}`;
+ question.innerText=quiz[i].q;
+ options.innerHTML="";
+
+ quiz[i].options.forEach((o,idx)=>{
+  let d=document.createElement("div");
+  d.className="option";
+  d.innerText=o;
+  d.onclick=()=>selectOption(d,idx);
+  options.appendChild(d);
+ });
+}
+
+/* ---------- Smart Select ---------- */
+function selectOption(el,idx){
+ if(lock) return;
+ lock=true;
+
+ const correctIndex=quiz[i].ans;
+ const opts=document.querySelectorAll(".option");
+
+ opts.forEach((o,i2)=>{
+  o.classList.add("disabled");
+  if(i2===correctIndex) o.classList.add("correct");
+ });
+
+ if(idx!==correctIndex){
+  el.classList.add("wrong");
+ }else{
+  score++;
+ }
+}
+
+/* ---------- Next ---------- */
+function next(){
+ i++;
+ if(i>=quiz.length){ endQuiz(); return; }
+ load();
+}
+
+/* ---------- End Quiz ---------- */
+function endQuiz(){
+ clearInterval(interval);
+ quizBox.classList.add("hide");
+ resultBox.classList.remove("hide");
+
+ document.getElementById("rName").innerText = student.name;
+ document.getElementById("rRoll").innerText = student.roll;
+ document.getElementById("rScore").innerText = score;
+ document.getElementById("rCorrect").innerText = score;
+ document.getElementById("rWrong").innerText = quiz.length - score;
+ document.getElementById("tq").innerText = quiz.length;
+ document.getElementById("rDate").innerText = new Date().toLocaleDateString();
+}
+
+/* ---------- Restart ---------- */
+function restart(){
+ resultBox.classList.add("hide");
+ studentName.value="";
+ rollNo.value="";
+ studentBox.classList.remove("hide");
+}
+</script>
+
+</body>
+</html>
