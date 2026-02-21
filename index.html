@@ -3,62 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>বাংলা নবজাগরণ কুইজ - ফুলবাড়ি আমিনিয়া হাই মাদ্রাসা(উঃ মাঃ)</title>
+    <title>Bengali Class VIII Quiz</title>
     <style>
-        /* Base Styles & Global Resets */
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&display=swap');
 
         :root {
             --primary-color: #6a11cb;
             --secondary-color: #2575fc;
-            --text-color: #333;
-            --light-text-color: #f4f4f4;
-            --bg-light: #ffffff;
-            --bg-dark: #f0f2f5;
-            --shadow-light: rgba(0, 0, 0, 0.1);
-            --shadow-medium: rgba(0, 0, 0, 0.2);
-            --success-color: #28a745;
-            --danger-color: #dc3545;
-            --warning-color: #ffc107;
-            --border-radius: 10px;
-            --font-family: 'Arial', sans-serif; /* Fallback to common sans-serif */
+            --background-gradient: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            --text-color: #ffffff;
+            --card-background: rgba(255, 255, 255, 0.9);
+            --button-bg: #4CAF50;
+            --button-hover-bg: #45a049;
+            --danger-bg: #f44336;
+            --danger-hover-bg: #da190b;
+            --input-bg: #f0f2f5;
+            --border-radius: 12px;
+            --box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            --correct-color: #4CAF50;
+            --wrong-color: #f44336;
+            --grade-a-plus: #008000; /* Green */
+            --grade-a: #228B22; /* ForestGreen */
+            --grade-b: #00BFFF; /* DeepSkyBlue */
+            --grade-c: #FFD700; /* Gold */
+            --grade-d: #FFA500; /* Orange */
+            --grade-f: #FF4500; /* OrangeRed */
         }
 
-        /* Bengali Font - Google Fonts (if external fonts were allowed, this would be linked) */
-        /* Since all CSS must be inside, we stick to system fonts. */
-        /* For better Bengali display, a font like 'Noto Sans Bengali' would be ideal */
-
         body {
-            font-family: var(--font-family);
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: var(--text-color);
-            min-height: 100vh;
+            font-family: 'Noto Sans Bengali', sans-serif;
+            margin: 0;
+            padding: 0;
             display: flex;
             justify-content: center;
-            align-items: center;
-            padding: 20px;
+            align-items: flex-start; /* Changed to flex-start for better scroll on mobile */
+            min-height: 100vh;
+            background: var(--background-gradient);
+            color: var(--text-color);
             line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            box-sizing: border-box;
+            padding-top: 20px; /* Add some top padding for mobile */
+            padding-bottom: 20px;
         }
 
         .container {
-            background-color: var(--bg-light);
-            padding: 30px;
+            background-color: var(--card-background);
+            padding: 30px 20px;
             border-radius: var(--border-radius);
-            box-shadow: 0 10px 30px var(--shadow-medium);
-            max-width: 600px;
-            width: 100%;
+            box-shadow: var(--box-shadow);
+            max-width: 90%;
+            width: 600px;
             text-align: center;
-            animation: fadeIn 0.8s ease-out;
+            color: #333;
+            animation: fadeIn 0.5s ease-out;
+            box-sizing: border-box;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -67,716 +70,849 @@
             margin-bottom: 15px;
         }
 
-        h1 {
-            font-size: 2.2em;
-            font-weight: 700;
-        }
-
-        h2 {
-            font-size: 1.8em;
-            font-weight: 600;
-        }
-
-        h3 {
-            font-size: 1.4em;
-            font-weight: 500;
-        }
-
-        p {
-            margin-bottom: 10px;
-            font-size: 1.1em;
-        }
-
-        .header-info {
-            background-color: var(--secondary-color);
-            color: var(--light-text-color);
-            padding: 15px 20px;
-            border-radius: var(--border-radius);
+        header {
             margin-bottom: 25px;
-            box-shadow: 0 4px 15px var(--shadow-light);
         }
 
-        .header-info h1 {
-            color: var(--light-text-color);
+        .school-name {
+            font-size: 1.8em;
+            font-weight: 700;
             margin-bottom: 5px;
+            color: var(--primary-color);
         }
 
-        .header-info p {
-            font-size: 1.1em;
-            opacity: 0.9;
-        }
-
-        .form-group {
+        .class-subject {
+            font-size: 1.2em;
+            color: #555;
             margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
             text-align: left;
         }
 
-        .form-group label {
+        .input-group label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--text-color);
-            font-size: 1.05em;
+            font-weight: 700;
+            color: #333;
         }
 
-        .form-group input[type="text"],
-        .form-group input[type="number"] {
-            width: 100%;
+        .input-group input[type="text"],
+        .input-group input[type="number"] {
+            width: calc(100% - 20px);
             padding: 12px;
-            border: 1px solid #ccc;
+            border: 1px solid #ddd;
             border-radius: var(--border-radius);
+            background-color: var(--input-bg);
+            color: #333;
             font-size: 1em;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            box-sizing: border-box;
         }
 
-        .form-group input[type="text"]:focus,
-        .form-group input[type="number"]:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.2);
+        .input-group input:focus {
             outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(37, 117, 252, 0.2);
         }
 
         .btn {
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            color: var(--light-text-color);
-            padding: 14px 25px;
+            background-color: var(--button-bg);
+            color: white;
+            padding: 12px 25px;
             border: none;
             border-radius: var(--border-radius);
-            font-size: 1.2em;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px var(--shadow-light);
-            display: inline-block;
-            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: 700;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 20px;
+            width: 100%;
+            max-width: 250px;
+            box-sizing: border-box;
         }
 
         .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px var(--shadow-medium);
-            opacity: 0.95;
+            background-color: var(--button-hover-bg);
+            transform: translateY(-2px);
         }
 
-        .btn-secondary {
-            background: var(--bg-dark);
-            color: var(--primary-color);
-            border: 1px solid var(--primary-color);
-            margin-top: 15px;
+        .btn:active {
+            transform: translateY(0);
         }
 
-        .btn-secondary:hover {
-            background: var(--primary-color);
-            color: var(--light-text-color);
-            border-color: var(--primary-color);
-        }
-
-        .quiz-section {
+        #start-screen, #quiz-screen, #result-screen {
             display: none;
+            width: 100%;
+        }
+
+        #start-screen {
+            display: block;
+        }
+
+        .quiz-question-container {
+            margin-top: 20px;
             text-align: left;
         }
 
-        .question-container {
-            background-color: var(--bg-dark);
-            padding: 25px;
-            border-radius: var(--border-radius);
-            margin-bottom: 20px;
-            box-shadow: 0 4px 10px var(--shadow-light);
+        .question-number {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 10px;
         }
 
         .question-text {
-            font-size: 1.2em;
+            font-size: 1.3em;
             margin-bottom: 20px;
-            color: var(--text-color);
-            font-weight: 600;
+            color: #333;
         }
 
-        .options-container label {
-            display: block;
-            background-color: var(--bg-light);
+        .options-container {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .option-item {
+            margin-bottom: 15px;
+            background-color: #e8f0fe; /* Light blue for options */
             padding: 15px;
-            margin-bottom: 10px;
             border-radius: var(--border-radius);
             cursor: pointer;
-            transition: all 0.3s ease;
-            border: 1px solid #eee;
-            position: relative;
-            padding-left: 45px; /* Space for custom radio button */
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            border: 1px solid transparent;
+            display: flex;
+            align-items: center;
         }
 
-        .options-container label:hover {
-            background-color: #f8f8f8;
+        .option-item:hover {
+            background-color: #d1e3ff;
+        }
+
+        .option-item input[type="radio"] {
+            margin-right: 15px;
+            transform: scale(1.4); /* Larger radio buttons */
+            cursor: pointer;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--secondary-color);
+            border-radius: 50%;
+            position: relative;
+            outline: none;
+            flex-shrink: 0; /* Prevent it from shrinking */
+        }
+
+        .option-item input[type="radio"]:checked {
+            background-color: var(--secondary-color);
             border-color: var(--secondary-color);
         }
 
-        .options-container input[type="radio"] {
-            display: none;
-        }
-
-        /* Custom Radio Button Styling */
-        .options-container label::before {
+        .option-item input[type="radio"]:checked::before {
             content: '';
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--primary-color);
-            border-radius: 50%;
-            background-color: var(--bg-light);
-            transition: all 0.3s ease;
-        }
-
-        .options-container input[type="radio"]:checked + label::before {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-        }
-
-        .options-container input[type="radio"]:checked + label::after {
-            content: '';
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
+            display: block;
             width: 10px;
             height: 10px;
-            background-color: var(--light-text-color);
+            background: white;
             border-radius: 50%;
-        }
-        /* End Custom Radio Button Styling */
-
-        .timer {
-            font-size: 1.3em;
-            font-weight: 700;
-            color: var(--danger-color);
-            margin-bottom: 20px;
-            background-color: var(--warning-color);
-            padding: 10px 15px;
-            border-radius: var(--border-radius);
-            display: inline-block;
-            box-shadow: 0 2px 8px var(--shadow-light);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
-        .submit-btn-container {
-            margin-top: 30px;
-            text-align: center;
+        .option-item label {
+            cursor: pointer;
+            font-size: 1.1em;
+            flex-grow: 1; /* Allow label to take remaining space */
+            margin-left: 0; /* Reset default margin */
         }
 
-        .result-screen {
-            display: none;
-            text-align: center;
-        }
-
-        .result-sheet {
-            background-color: var(--bg-dark);
-            padding: 30px;
-            border-radius: var(--border-radius);
-            box-shadow: 0 6px 20px var(--shadow-medium);
-            margin-bottom: 25px;
-            text-align: left;
-        }
-
-        .result-sheet h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: var(--secondary-color);
-        }
-
-        .result-item {
+        .quiz-navigation {
             display: flex;
             justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px dashed #ddd;
+            margin-top: 30px;
+            gap: 10px;
+        }
+
+        .quiz-navigation .btn {
+            width: 48%; /* Adjust for spacing */
+            max-width: none;
+            margin-top: 0;
+        }
+
+        #submit-quiz-btn {
+            background-color: var(--primary-color);
+            margin-top: 30px;
+            max-width: 100%;
+        }
+
+        #submit-quiz-btn:hover {
+            background-color: #5b0fbb;
+        }
+
+        /* Result Screen Styling */
+        #result-screen {
+            text-align: left;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: var(--border-radius);
+            margin-top: 20px;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        #result-screen h2 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .result-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #ccc;
+        }
+        .result-info div {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
             font-size: 1.1em;
+            color: #555;
+        }
+        .result-info span:first-child {
+            font-weight: 700;
+            color: #333;
         }
 
-        .result-item:last-child {
-            border-bottom: none;
-        }
-
-        .result-item span:first-child {
-            font-weight: 600;
-        }
-
-        .grade {
+        #grade-display {
             font-size: 2em;
             font-weight: 700;
-            margin-top: 20px;
+            text-align: center;
+            margin: 20px 0 30px;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            color: white;
+            display: inline-block;
+            min-width: 100px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .grade-A-plus { background-color: var(--grade-a-plus); }
+        .grade-A { background-color: var(--grade-a); }
+        .grade-B { background-color: var(--grade-b); }
+        .grade-C { background-color: var(--grade-c); }
+        .grade-D { background-color: var(--grade-d); }
+        .grade-F { background-color: var(--grade-f); }
+
+        .answer-feedback {
+            margin-top: 30px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+        .answer-feedback h3 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .feedback-item {
+            margin-bottom: 25px;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border: 1px solid #e0e0e0;
+        }
+
+        .feedback-item p {
+            margin: 0 0 10px 0;
+            font-size: 1.1em;
+            color: #444;
+        }
+
+        .feedback-item .question-text-feedback {
+            font-weight: 700;
             color: var(--primary-color);
-            text-shadow: 1px 1px 2px var(--shadow-light);
+            margin-bottom: 10px;
+            font-size: 1.2em;
         }
 
-        .correct-answer-highlight {
-            background-color: var(--success-color) !important;
-            color: var(--light-text-color);
-            border-color: var(--success-color) !important;
-        }
-
-        .wrong-answer-highlight {
-            background-color: var(--danger-color) !important;
-            color: var(--light-text-color);
-            border-color: var(--danger-color) !important;
-        }
-
-        .explanation {
-            font-size: 0.9em;
-            color: var(--light-text-color);
-            margin-top: 5px;
-            background-color: rgba(0, 0, 0, 0.2);
-            padding: 5px 10px;
-            border-radius: 5px;
-        }
-
-        .error-message {
-            color: var(--danger-color);
-            margin-top: -10px;
-            margin-bottom: 15px;
-            font-weight: 600;
+        .feedback-item .option-text {
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin-bottom: 5px;
+            display: block;
+            background-color: #f0f0f0;
+            border: 1px solid #e0e0e0;
+            position: relative; /* For checkmark/cross */
             text-align: left;
-            font-size: 0.95em;
         }
 
-        /* Responsive Adjustments */
-        @media (max-width: 480px) {
+        .feedback-item .option-text.correct {
+            background-color: #e6ffe6; /* Light green */
+            border-color: var(--correct-color);
+            color: var(--correct-color);
+            font-weight: 600;
+        }
+
+        .feedback-item .option-text.wrong {
+            background-color: #ffe6e6; /* Light red */
+            border-color: var(--wrong-color);
+            color: var(--wrong-color);
+            font-weight: 600;
+        }
+        .feedback-item .option-text.selected-wrong::after {
+            content: '❌';
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .feedback-item .option-text.correct::after {
+            content: '✔️';
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        /* Style for correct option when user selected wrong or didn't answer */
+        .feedback-item .option-text.correct-unselected {
+            background-color: #f0f0f0; /* Default neutral */
+            border-color: #e0e0e0;
+            color: #444;
+            position: relative; /* For the checkmark */
+        }
+        .feedback-item .option-text.correct-unselected::after {
+            content: '✅'; /* Green checkmark, softer than a bold one */
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+
+        #download-pdf-btn {
+            background-color: #dc3545; /* Red for download button */
+            margin-top: 30px;
+            max-width: 300px;
+            width: 100%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #download-pdf-btn:hover {
+            background-color: #c82333;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Responsive adjustments */
+        @media (min-width: 768px) {
             .container {
-                padding: 20px;
-                margin: 10px;
+                padding: 40px;
+                max-width: 800px; /* Wider on larger screens */
             }
-
-            h1 {
-                font-size: 1.8em;
+            .school-name {
+                font-size: 2.2em;
             }
-
-            h2 {
-                font-size: 1.5em;
+            .class-subject {
+                font-size: 1.4em;
             }
-
-            .header-info {
-                padding: 12px 15px;
+            .input-group input[type="text"],
+            .input-group input[type="number"] {
+                width: calc(50% - 15px); /* Two columns for inputs */
+                display: inline-block;
+                margin-right: 10px;
             }
-
-            .header-info h1 {
-                font-size: 1.6em;
+            .input-group label {
+                width: 100%; /* Labels still full width */
             }
-
-            .header-info p {
-                font-size: 0.95em;
+            .input-group:nth-child(even) input {
+                margin-right: 0;
             }
-
             .btn {
-                padding: 12px 20px;
-                font-size: 1.1em;
-            }
-
-            .question-text {
-                font-size: 1.1em;
-            }
-
-            .options-container label {
-                padding: 12px 15px 12px 40px;
-                font-size: 0.95em;
-            }
-
-            .options-container label::before {
-                width: 18px;
-                height: 18px;
-                left: 10px;
-            }
-
-            .options-container input[type="radio"]:checked + label::after {
-                width: 8px;
-                height: 8px;
-                left: 16px;
-            }
-
-            .timer {
-                font-size: 1.1em;
-            }
-            .result-sheet {
-                padding: 20px;
-            }
-            .result-item {
-                font-size: 1em;
-            }
-            .grade {
-                font-size: 1.6em;
-            }
-        }
-
-        /* Print Styles */
-        @media print {
-            body {
-                background: none;
-                display: block;
-                padding: 0;
-            }
-            .container {
-                box-shadow: none;
-                border-radius: 0;
-                max-width: none;
                 width: auto;
-                margin: 0;
-                padding: 0;
+                min-width: 200px;
             }
-            .header-info, .quiz-section, .start-screen, .btn, .error-message, .timer {
-                display: none !important;
+            .quiz-navigation .btn {
+                width: 180px;
             }
-            .result-screen {
-                display: block !important;
-                position: static !important;
-                width: 100% !important;
-                background-color: white;
-                color: black;
-                padding: 20px;
+            #submit-quiz-btn, #download-pdf-btn {
+                max-width: 300px;
             }
-            .result-sheet {
-                box-shadow: none;
-                border: 1px solid #eee;
-                background-color: white;
+            .result-info {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: space-around;
             }
-            .result-sheet h2 {
-                color: #333;
-            }
-            .result-item {
-                border-bottom: 1px solid #eee;
-            }
-            h1, h2, h3, p, span {
-                color: black !important;
+            .result-info div {
+                width: 45%; /* Two columns */
             }
         }
-
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- School Header -->
-        <div class="header-info">
-            <h1>ফুলবাড়ি এ.এইচ. মাদ্রাসা</h1>
-            <p>শ্রেণী: অষ্টম | বিষয়: বাংলা</p>
+    <div class="container" id="quiz-container">
+        <!-- Start Screen -->
+        <div id="start-screen">
+            <header>
+                <div class="school-name">FULBARI AMINIA HIGH MADRASAH(H S)</div>
+                <div class="class-subject">CLASS:VIII | SUB: BENGALI</div>
+            </header>
+            <h1>বাংলা ক্যুইজ</h1>
+            <div class="input-group">
+                <label for="student-name">শিক্ষার্থীর নাম:</label>
+                <input type="text" id="student-name" placeholder="আপনার নাম লিখুন" required>
+            </div>
+            <div class="input-group">
+                <label for="roll-number">রোল নম্বর:</label>
+                <input type="number" id="roll-number" placeholder="আপনার রোল নম্বর লিখুন" required>
+            </div>
+            <button class="btn" id="start-quiz-btn">কুইজ শুরু করুন</button>
         </div>
 
-        <!-- Start Screen -->
-        <section id="start-screen">
-            <h2>কুইজে স্বাগতম!</h2>
-            <p>আপনার নাম এবং রোল নম্বর প্রবেশ করে কুইজ শুরু করুন।</p>
-
-            <div class="form-group">
-                <label for="studentName">শিক্ষার্থীর নাম:</label>
-                <input type="text" id="studentName" placeholder="আপনার পুরো নাম লিখুন" required>
-                <div id="name-error" class="error-message" style="display: none;">শিক্ষার্থীর নাম আবশ্যক।</div>
-            </div>
-
-            <div class="form-group">
-                <label for="rollNumber">রোল নম্বর:</label>
-                <input type="number" id="rollNumber" placeholder="আপনার রোল নম্বর লিখুন" required>
-                <div id="roll-error" class="error-message" style="display: none;">রোল নম্বর আবশ্যক।</div>
-            </div>
-
-            <button class="btn" id="startQuizBtn">কুইজ শুরু করুন</button>
-        </section>
-
         <!-- Quiz Screen -->
-        <section id="quiz-screen" class="quiz-section">
-            <p class="timer" id="quizTimer">সময়: 15:00</p>
-            <div id="questions-container">
-                <!-- Questions will be dynamically loaded here -->
+        <div id="quiz-screen" class="hidden">
+            <header>
+                <div class="school-name">FULBARI AMINIA HIGH MADRASAH (H.S)</div>
+                <div class="class-subject">CLASS:VIII| SUB:BENGALI</div>
+            </header>
+            <h2 id="quiz-title">কুইজ</h2>
+            <div class="quiz-question-container">
+                <p class="question-number">প্রশ্ন <span id="current-question-index">1</span> / <span id="total-questions-display"></span></p>
+                <p class="question-text" id="question-text"></p>
+                <ul class="options-container" id="options-container">
+                    <!-- Options will be loaded here by JavaScript -->
+                </ul>
             </div>
-            <div class="submit-btn-container">
-                <button class="btn" id="submitQuizBtn">জমা দিন</button>
+            <div class="quiz-navigation">
+                <button class="btn" id="prev-btn" disabled>পূর্ববর্তী</button>
+                <button class="btn" id="next-btn">পরবর্তী</button>
             </div>
-        </section>
+            <button class="btn" id="submit-quiz-btn">কুইজ জমা দিন</button>
+        </div>
 
         <!-- Result Screen -->
-        <section id="result-screen" class="result-screen">
-            <h2>কুইজের ফলাফল</h2>
-            <div class="result-sheet">
-                <div class="result-item">
-                    <span>শিক্ষার্থীর নাম:</span> <span id="displayStudentName"></span>
-                </div>
-                <div class="result-item">
-                    <span>রোল নম্বর:</span> <span id="displayRollNumber"></span>
-                </div>
-                <div class="result-item">
-                    <span>মোট প্রশ্ন:</span> <span id="totalQuestions"></span>
-                </div>
-                <div class="result-item">
-                    <span>মোট নম্বর:</span> <span id="totalMarks"></span>
-                </div>
-                <div class="result-item">
-                    <span>প্রাপ্ত নম্বর:</span> <span id="obtainedMarks"></span>
-                </div>
-                <div class="result-item">
-                    <span>শতাংশ:</span> <span id="percentage"></span>
-                </div>
-                <div class="result-item">
-                    <span>গ্রেড:</span> <span id="grade" class="grade"></span>
+        <div id="result-screen" class="hidden">
+            <h2>ফলাফল পত্র</h2>
+            <div class="result-info">
+                <div><span>স্কুল:</span> <span id="result-school-name"></span></div>
+                <div><span>ক্লাস:</span> <span id="result-class-subject"></span></div>
+                <div><span>শিক্ষার্থীর নাম:</span> <span id="result-student-name"></span></div>
+                <div><span>রোল নম্বর:</span> <span id="result-roll-number"></span></div>
+                <div><span>মোট প্রশ্ন:</span> <span id="result-total-questions"></span></div>
+                <div><span>প্রাপ্ত নম্বর:</span> <span id="result-obtained-marks"></span></div>
+                <div><span>শতাংশ:</span> <span id="result-percentage"></span>%</div>
+            </div>
+            <div><span>গ্রেড:</span> <span id="grade-display"></span></div>
+
+            <div class="answer-feedback">
+                <h3>সঠিক উত্তরসমূহ</h3>
+                <div id="feedback-details-container">
+                    <!-- Feedback for each question will be loaded here -->
                 </div>
             </div>
-            <button class="btn" id="downloadPdfBtn">ফলাফল PDF ডাউনলোড করুন</button>
-            <button class="btn btn-secondary" id="retryQuizBtn">আবার কুইজ দিন</button>
-        </section>
+            <button class="btn" id="download-pdf-btn">ফলাফল PDF ডাউনলোড করুন</button>
+        </div>
     </div>
 
+    <!-- jsPDF and html2pdf CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script>
-        const quizData = [
+        // Questions Array
+        const questions = [
             {
-                question: "বাংলার নবজাগরণের সময়কাল কত ছিল?",
-                options: ["অষ্টাদশ শতক", "ঊনবিংশ শতক", "বিংশ শতক", "সপ্তদশ শতক"],
-                correctAnswerIndex: 1
+                question: "এজিদের সৈন্যবাহিনী কোন নগরে প্রবেশ করলে মদিনাবাসী এজিদের বিরুদ্ধে জেহাদ ঘোষণা করে?",
+                options: ["মক্কা", "বসরা", "মদিনা", "কুফা"],
+                answer: "মদিনা"
             },
             {
-                question: "বাংলা নবজাগরণের প্রতিকৃত কাকে বলা হয়?",
-                options: ["রবীন্দ্রনাথ ঠাকুর", "ঈশ্বরচন্দ্র বিদ্যাসাগর", "রাজা রামমোহন রায়", "স্বামী বিবেকানন্দ"],
-                correctAnswerIndex: 2
+                question: "এলাহি ___ প্রাণরক্ষা করো। শূন্যস্থান পূরণ করো।",
+                options: ["আমার", "হোসেনের", "হাসানের", "মদিনাবাসীদের"],
+                answer: "হাসানের"
             },
             {
-                question: "সতীদাহ প্রথা রদ হয় কার প্রচেষ্টায়?",
-                options: ["হেনরি লুই ভিভিয়ান ডিরোজিও", "ঈশ্বরচন্দ্র বিদ্যাসাগর", "রাজা রামমোহন রায়", "দেবেন্দ্রনাথ ঠাকুর"],
-                correctAnswerIndex: 2
+                question: "আমি ___ সান্ত্বনা করিয়া আসিতেছি। শূন্যস্থান পূরণ করো।",
+                options: ["পুরুষগণকে", "স্ত্রীগণকে", "অবলাগণকে", "দুর্বলগণকে"],
+                answer: "অবলাগণকে"
             },
             {
-                question: "বিধবা বিবাহ আইন প্রবর্তন হয় কার উদ্যোগে?",
-                options: ["রামমোহন রায়", "বিদ্যাসাগর", "বঙ্কিমচন্দ্র চট্টোপাধ্যায়", "মাইকেল মধুসূদন দত্ত"],
-                correctAnswerIndex: 1
+                question: "এই ___ সময়ে তোমরা এ বেশে কোথা যাইতেছ? শূন্যস্থান পূরণ করো।",
+                options: ["আনন্দময়", "বিপদ", "উৎসব", "সাধারণ"],
+                answer: "বিপদ"
             },
             {
-                question: "ইয়ং বেঙ্গল গোষ্ঠী কাদের নেতৃত্বে গড়ে উঠেছিল?",
-                options: ["দেবেন্দ্রনাথ ঠাকুর", "ডিরোজিও", "রামকৃষ্ণ পরমহংস", "স্বামী বিবেকানন্দ"],
-                correctAnswerIndex: 1
+                question: "এই হস্ত ___ মস্তক চূর্ণ করিতে সক্ষম। শূন্যস্থান পূরণ করো।",
+                options: ["মিত্রের", "শক্রর", "স্বজনের", "বিধর্মীর"],
+                answer: "বিধর্মীর"
             },
             {
-                question: "তত্ত্ববোধিনী সভা কে প্রতিষ্ঠা করেন?",
-                options: ["রামমোহন রায়", "ঈশ্বরচন্দ্র বিদ্যাসাগর", "দেবেন্দ্রনাথ ঠাকুর", "অক্ষয়কুমার দত্ত"],
-                correctAnswerIndex: 2
+                question: "মীর মশাররফ হোসেনের বিখ্যাত গ্রন্থ কোনটি?",
+                options: ["সাজাহান", "বিষাদ-সিন্ধু", "আনন্দ-নগরী", "জমিদার দর্পণ"],
+                answer: "বিষাদ-সিন্ধু"
             },
             {
-                question: "'নীলদর্পণ' নাটকের রচয়িতা কে?",
-                options: ["মাইকেল মধুসূদন দত্ত", "দীনবন্ধু মিত্র", "বঙ্কিমচন্দ্র চট্টোপাধ্যায়", "রবীন্দ্রনাথ ঠাকুর"],
-                correctAnswerIndex: 1
+                question: "মদিনা কীসের নাম?",
+                options: ["পাহাড়ের", "নদীর", "নগরীর", "গ্রামের"],
+                answer: "নগরীর"
             },
             {
-                question: "বাংলার নবজাগরণকে 'একক মানবতাবাদ' আখ্যা দিয়েছেন কে?",
-                options: ["সুপ্রকাশ রায়", "বিনয় ঘোষ", "সুমিত সরকার", "রজনীপাম দত্ত"],
-                correctAnswerIndex: 1
+                question: "নগরবাসীরা আজ কিসে উন্মত্ত?",
+                options: ["শত্রুভয়ে", "শত্রুবধে", "আনন্দ উল্লাসে", "বিপ্লবে"],
+                answer: "শত্রুবধে"
             },
             {
-                question: "শিক্ষা বিস্তারে 'চুইয়ে পড়া নীতি' (Downward Filtration Theory) কে চালু করেন?",
-                options: ["লর্ড বেন্টিঙ্ক", "লর্ড মেকলে", "লর্ড ডালহৌসি", "উইলিয়াম কেরি"],
-                correctAnswerIndex: 1
+                question: "হাসান কাদের সঙ্গে সমরক্ষেত্রে যেতে মনস্থ করেছিলেন?",
+                options: ["হোসেনের সঙ্গে", "আবদুর রহমানের সঙ্গে", "সকলকে একত্র শ্রেণিবদ্ধ করে", "স্ত্রীলোকদের সঙ্গে"],
+                answer: "সকলকে একত্র শ্রেণিবদ্ধ করে"
             },
             {
-                question: "'বঙ্গদর্শন' পত্রিকা কে প্রকাশ করেন?",
-                options: ["ঈশ্বরচন্দ্র বিদ্যাসাগর", "রবীন্দ্রনাথ ঠাকুর", "বঙ্কিমচন্দ্র চট্টোপাধ্যায়", "শরৎচন্দ্র চট্টোপাধ্যায়"],
-                correctAnswerIndex: 2
+                question: "হাসান অশ্রুসংবরণ করতে পারলেন না কী দেখে?",
+                options: ["শত্রুদের আক্রমণ", "মদিনাবাসীর পলায়ন", "অবলাগণের যুদ্ধবেশ", "হোসেনের বিপদ"],
+                answer: "অবলাগণের যুদ্ধবেশ"
+            },
+            {
+                question: "স্ত্রীলোকদের মধ্যে একজন হাসানকে কী বলে সম্বোধন করলেন?",
+                options: ["ভাই", "হজরত", "পুত্র", "গুরু"],
+                answer: "হজরত"
+            },
+            {
+                question: "স্ত্রীলোকেরা কাদের শত্রুমুখে পাঠিয়েছিল?",
+                options: ["শুধুমাত্র পুত্রদের", "শুধুমাত্র স্বামীদের", "শুধুমাত্র ভ্রাতাদের", "ভ্রাতা, পুত্র, স্বামী সকলকেই"],
+                answer: "ভ্রাতা, পুত্র, স্বামী সকলকেই"
+            },
+            {
+                question: "স্ত্রীলোকেরা কেন অস্ত্র গ্রহণ করতে চেয়েছিল?",
+                options: ["ব্যক্তিগত প্রতিশোধের জন্য", "ধর্মরক্ষা ও জন্মভূমি রক্ষার জন্য", "হাসানকে সাহায্য করতে", "এজিদের বিরুদ্ধে বিদ্রোহ করতে"],
+                answer: "ধর্মরক্ষা ও জন্মভূমি রক্ষার জন্য"
+            },
+            {
+                question: "হাসান নারীগণকে যুদ্ধ না করে কী করতে মিনতি করেছিলেন?",
+                options: ["ঘরে বসে ঈশ্বরের নিকট প্রার্থনা করতে", "অস্ত্র প্রশিক্ষণ নিতে", "আহতদের সেবা করতে", "খাবার তৈরি করতে"],
+                answer: "ঘরে বসে ঈশ্বরের নিকট প্রার্থনা করতে"
+            },
+            {
+                question: "স্ত্রীলোকেরা ঈশ্বরের কাছে কীসের উপর নির্ভর করে হাসানকে শত্রুমুখে দিয়েছিল?",
+                options: ["তাদের নিজেদের শক্তির উপর", "ঈশ্বরের নামের উপর", "মদিনাবাসীর সাহসের উপর", "হাসানের ইচ্ছার উপর"],
+                answer: "ঈশ্বরের নামের উপর"
+            },
+            {
+                question: "'কাফের' শব্দের অর্থ কী?",
+                options: ["মুসলমান", "অবিশ্বাসী", "ধার্মিক", "শত্রু"],
+                answer: "অবিশ্বাসী"
+            },
+            {
+                question: "‘বঙ্গভাষা’ কবিতার কবির নাম কী?",
+                options: ["ভারতচন্দ্র", "অতুলপ্রসাদ", "মধুসূদন দত্ত", "রবীন্দ্রনাথ ঠাকুর"],
+                answer: "মধুসূদন দত্ত"
+            },
+            {
+                question: "‘ওরে বাছা! মাতৃ-কোষে রতনের রাজি,’ ইত্যাদি কথাগুলি কবিকে স্বপ্নে কে বলে গেল?",
+                options: ["সরস্বতী", "জিশুপ্রিস্ট", "কুললক্ষ্মী", "কুলদেবতা"],
+                answer: "কুললক্ষ্মী"
+            },
+            {
+                question: "‘ভাণ্ডার’ শব্দের অর্থ কী?",
+                options: ["গুদাম", "পাত্র", "জায়গা", "ঝুড়ি"],
+                answer: "গুদাম"
+            },
+            {
+                question: "‘বঙ্গভাষা’ কবিতাটিকে কী বলা হয়?",
+                options: ["শোক কবিতা", "চতুর্দশপদী কবিতা", "গীতি কবিতা", "গদ্য কবিতা"],
+                answer: "চতুর্দশপদী কবিতা"
+            },
+            {
+                question: "মধুসূদন দত্ত কোন ছন্দের প্রবর্তক?",
+                options: ["স্বরবৃত্ত ছন্দ", "মাত্রাবৃত্ত ছন্দ", "অমিত্রাক্ষর ছন্দ", "অক্ষরবৃত্ত ছন্দ"],
+                answer: "অমিত্রাক্ষর ছন্দ"
+            },
+            {
+                question: "'বঙ্গভাষা' কবিতাটি কবির কোন কাব্যগ্রন্থ থেকে নেওয়া হয়েছে?",
+                options: ["মেঘনাদবধ কাব্য", "বীরাঙ্গনা", "চতুর্দশপদী কবিতাবলী", "শর্মিষ্ঠা"],
+                answer: "চতুর্দশপদী কবিতাবলী"
+            },
+            {
+                question: "কবি প্রথমে কোন ভাষার কাব্যচর্চায় আত্মনিয়োগ করেছিলেন?",
+                options: ["ফরাসি", "বাংলা", "ইংরেজি", "ল্যাটিন"],
+                answer: "ইংরেজি"
+            },
+            {
+                question: "ঈশ্বরচন্দ্র বিদ্যাসাগর কত খ্রিস্টাব্দে জন্মগ্রহণ করেন?",
+                options: ["১৮২০ খ্রীস্টাব্দে", "১৮২৯ খ্রীস্টাব্দে", "১৮৩০ খ্রীস্টাব্দে", "১৮৩৯ খ্রীস্টাব্দে"],
+                answer: "১৮২০ খ্রীস্টাব্দে"
+            },
+            {
+                question: "বিদ্যাসাগর কোন পরীক্ষায় উত্তীর্ণ হয়ে 'বিদ্যাসাগর' উপাধি পান?",
+                options: ["এম.এ. পরীক্ষা", "সংস্কৃত পরীক্ষা", "হিন্দু ল পরীক্ষা", "ব্যাকরণ পরীক্ষা"],
+                answer: "হিন্দু ল পরীক্ষা"
+            },
+            {
+                question: "আলি ইবনে আব্বাস কার প্রিয়পাত্র ছিলেন?",
+                options: ["মামুনের", "হোসেনের", "এজিদের", "আবদুর রহমানের"],
+                answer: "মামুনের"
+            },
+            {
+                question: "আটক ব্যক্তিটি আলি ইবনে আব্বাসকে তার নিবাস কোথায় বললেন?",
+                options: ["বাগদাদ", "মদিনা", "ডেমাস্কাস", "মিশর"],
+                answer: "ডেমাস্কাস"
+            },
+            {
+                question: "মানুষের বাগযন্ত্রের স্বল্পতম প্রয়াসে একটি শব্দের যতটুকু অংশ উচ্চারিত হয়, তাকে কী বলে?",
+                options: ["বর্ণ", "শব্দ", "দল বা অক্ষর", "বাক্য"],
+                answer: "দল বা অক্ষর"
+            },
+            {
+                question: "যে দলের শেষে স্বরধ্বনি থাকে এবং যা টেনে উচ্চারণ করা যায়, তাকে কী বলে?",
+                options: ["রুদ্ধদল", "মুক্তদল", "মিশ্রদল", "অসম্পূর্ণ দল"],
+                answer: "মুক্তদল"
+            },
+            {
+                question: "'শরীর > শরীল' এটি কোন ধ্বনি পরিবর্তনের উদাহরণ?",
+                options: ["সমীভবন", "অভিশ্রুতি", "বিষমীভবন", "অপিনিহিতি"],
+                answer: "বিষমীভবন"
             }
         ];
 
-        const totalQuestions = quizData.length;
+        let currentQuestionIndex = 0;
+        let userAnswers = new Array(questions.length).fill(null);
+        let studentName = "";
+        let rollNumber = "";
+        const totalQuestions = questions.length;
         const marksPerQuestion = 1;
-        const timeLimitMinutes = 15;
-        let timeRemaining = timeLimitMinutes * 60;
-        let timerInterval;
-        let studentName = '';
-        let rollNumber = '';
-        let userAnswers = new Array(totalQuestions).fill(null); // To store user's selected option index for each question
+
+        const schoolNameText = "ফুলবাড়ি এম.এইচ.ইউ হাই মাদ্রাসাহ";
+        const classSubjectText = "ক্লাস: অষ্টম | বিষয়: বাংলা";
 
         const startScreen = document.getElementById('start-screen');
         const quizScreen = document.getElementById('quiz-screen');
         const resultScreen = document.getElementById('result-screen');
-        const startQuizBtn = document.getElementById('startQuizBtn');
-        const submitQuizBtn = document.getElementById('submitQuizBtn');
-        const retryQuizBtn = document.getElementById('retryQuizBtn');
-        const downloadPdfBtn = document.getElementById('downloadPdfBtn');
-        const studentNameInput = document.getElementById('studentName');
-        const rollNumberInput = document.getElementById('rollNumber');
-        const nameError = document.getElementById('name-error');
-        const rollError = document.getElementById('roll-error');
-        const questionsContainer = document.getElementById('questions-container');
-        const quizTimer = document.getElementById('quizTimer');
+        const startQuizBtn = document.getElementById('start-quiz-btn');
+        const submitQuizBtn = document.getElementById('submit-quiz-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const downloadPdfBtn = document.getElementById('download-pdf-btn');
+
+        const studentNameInput = document.getElementById('student-name');
+        const rollNumberInput = document.getElementById('roll-number');
+        const currentQuestionIndexDisplay = document.getElementById('current-question-index');
+        const totalQuestionsDisplay = document.getElementById('total-questions-display');
+        const questionTextElement = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+
+        const resultSchoolName = document.getElementById('result-school-name');
+        const resultClassSubject = document.getElementById('result-class-subject');
+        const resultStudentName = document.getElementById('result-student-name');
+        const resultRollNumber = document.getElementById('result-roll-number');
+        const resultTotalQuestions = document.getElementById('result-total-questions');
+        const resultObtainedMarks = document.getElementById('result-obtained-marks');
+        const resultPercentage = document.getElementById('result-percentage');
+        const gradeDisplay = document.getElementById('grade-display');
+        const feedbackDetailsContainer = document.getElementById('feedback-details-container');
+
+        // Set total questions display
+        totalQuestionsDisplay.textContent = totalQuestions;
 
         startQuizBtn.addEventListener('click', startQuiz);
         submitQuizBtn.addEventListener('click', submitQuiz);
-        retryQuizBtn.addEventListener('click', retryQuiz);
-        downloadPdfBtn.addEventListener('click', downloadResultPDF);
+        prevBtn.addEventListener('click', showPreviousQuestion);
+        nextBtn.addEventListener('click', showNextQuestion);
+        downloadPdfBtn.addEventListener('click', downloadResultPdf);
 
         function startQuiz() {
             studentName = studentNameInput.value.trim();
             rollNumber = rollNumberInput.value.trim();
 
-            let isValid = true;
-            if (studentName === '') {
-                nameError.style.display = 'block';
-                isValid = false;
-            } else {
-                nameError.style.display = 'none';
-            }
-
-            if (rollNumber === '') {
-                rollError.style.display = 'block';
-                isValid = false;
-            } else {
-                rollError.style.display = 'none';
-            }
-
-            if (!isValid) {
+            if (!studentName || !rollNumber) {
+                alert('শিক্ষার্থীর নাম এবং রোল নম্বর লিখুন।');
                 return;
             }
 
-            startScreen.style.display = 'none';
-            quizScreen.style.display = 'block';
-            displayQuestions();
-            startTimer();
+            startScreen.classList.add('hidden');
+            quizScreen.classList.remove('hidden');
+            loadQuestion();
         }
 
-        function displayQuestions() {
-            questionsContainer.innerHTML = '';
-            quizData.forEach((q, index) => {
-                const questionDiv = document.createElement('div');
-                questionDiv.classList.add('question-container');
-                questionDiv.innerHTML = `
-                    <p class="question-text">প্রশ্ন ${index + 1}: ${q.question}</p>
-                    <div class="options-container" id="options-${index}">
-                        ${q.options.map((option, optIndex) => `
-                            <input type="radio" id="q${index}-option${optIndex}" name="question${index}" value="${optIndex}" onchange="selectAnswer(${index}, ${optIndex})">
-                            <label for="q${index}-option${optIndex}">${String.fromCharCode(2437 + optIndex)} ${option}</label>
-                        `).join('')}
-                    </div>
-                `;
-                questionsContainer.appendChild(questionDiv);
+        function loadQuestion() {
+            const question = questions[currentQuestionIndex];
+            currentQuestionIndexDisplay.textContent = currentQuestionIndex + 1;
+            questionTextElement.textContent = question.question;
+            optionsContainer.innerHTML = ''; // Clear previous options
 
-                // Restore previous selections if any (for retry)
-                if (userAnswers[index] !== null) {
-                    const selectedInput = document.getElementById(`q${index}-option${userAnswers[index]}`);
-                    if (selectedInput) {
-                        selectedInput.checked = true;
-                    }
-                }
-            });
-        }
+            question.options.forEach((option, index) => {
+                const li = document.createElement('li');
+                li.classList.add('option-item');
+                const radio = document.createElement('input');
+                radio.type = 'radio';
+                radio.id = `option-${index}`;
+                radio.name = `question-${currentQuestionIndex}`;
+                radio.value = option;
+                radio.addEventListener('change', () => selectAnswer(option));
 
-        function selectAnswer(questionIndex, optionIndex) {
-            userAnswers[questionIndex] = optionIndex;
-        }
+                const label = document.createElement('label');
+                label.htmlFor = `option-${index}`;
+                label.textContent = option;
 
-        function startTimer() {
-            timeRemaining = timeLimitMinutes * 60;
-            updateTimerDisplay();
-            timerInterval = setInterval(() => {
-                timeRemaining--;
-                updateTimerDisplay();
-                if (timeRemaining <= 0) {
-                    clearInterval(timerInterval);
-                    submitQuiz(true); // Submit automatically when time runs out
-                }
-            }, 1000);
-        }
+                li.appendChild(radio);
+                li.appendChild(label);
+                optionsContainer.appendChild(li);
 
-        function updateTimerDisplay() {
-            const minutes = Math.floor(timeRemaining / 60);
-            const seconds = timeRemaining % 60;
-            quizTimer.textContent = `সময়: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        }
-
-        function submitQuiz(timeExpired = false) {
-            clearInterval(timerInterval);
-            let score = 0;
-            quizData.forEach((q, index) => {
-                if (userAnswers[index] === q.correctAnswerIndex) {
-                    score++;
+                // If user has already answered this question, pre-select it
+                if (userAnswers[currentQuestionIndex] === option) {
+                    radio.checked = true;
                 }
             });
 
-            displayResults(score);
-            highlightAnswers();
-            quizScreen.style.display = 'none';
-            resultScreen.style.display = 'block';
+            updateNavigationButtons();
+        }
 
-            if (timeExpired) {
-                alert('দুঃখিত, আপনার সময় শেষ হয়ে গেছে! আপনার উত্তর জমা দেওয়া হয়েছে।');
+        function selectAnswer(selectedOption) {
+            userAnswers[currentQuestionIndex] = selectedOption;
+        }
+
+        function showNextQuestion() {
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                loadQuestion();
             }
         }
 
-        function calculateGrade(percentage) {
-            if (percentage >= 90) return 'A+';
-            if (percentage >= 80) return 'A';
-            if (percentage >= 70) return 'B';
-            if (percentage >= 60) return 'C';
-            if (percentage >= 50) return 'D';
-            return 'F';
+        function showPreviousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                loadQuestion();
+            }
         }
 
-        function displayResults(score) {
-            const totalPossibleMarks = totalQuestions * marksPerQuestion;
-            const percentage = (score / totalPossibleMarks) * 100;
-            const grade = calculateGrade(percentage);
+        function updateNavigationButtons() {
+            prevBtn.disabled = currentQuestionIndex === 0;
+            nextBtn.disabled = currentQuestionIndex === questions.length - 1;
 
-            document.getElementById('displayStudentName').textContent = studentName;
-            document.getElementById('displayRollNumber').textContent = rollNumber;
-            document.getElementById('totalQuestions').textContent = totalQuestions;
-            document.getElementById('totalMarks').textContent = totalPossibleMarks;
-            document.getElementById('obtainedMarks').textContent = score;
-            document.getElementById('percentage').textContent = percentage.toFixed(2) + '%';
-            document.getElementById('grade').textContent = grade;
+            if (currentQuestionIndex === questions.length - 1) {
+                submitQuizBtn.style.display = 'block';
+            } else {
+                submitQuizBtn.style.display = 'none';
+            }
         }
 
-        function highlightAnswers() {
-            quizData.forEach((q, index) => {
-                const optionsContainer = document.getElementById(`options-${index}`);
-                const selectedOptionIndex = userAnswers[index];
-                const correctAnswerIndex = q.correctAnswerIndex;
+        function submitQuiz() {
+            if (confirm('আপনি কি নিশ্চিত যে কুইজ জমা দিতে চান?')) {
+                quizScreen.classList.add('hidden');
+                resultScreen.classList.remove('hidden');
+                displayResult();
+            }
+        }
 
-                if (optionsContainer) {
-                    // Disable all radio buttons
-                    const radioButtons = optionsContainer.querySelectorAll(`input[name="question${index}"]`);
-                    radioButtons.forEach(radio => radio.disabled = true);
+        function calculateScoreAndGrade() {
+            let score = 0;
+            for (let i = 0; i < questions.length; i++) {
+                if (userAnswers[i] === questions[i].answer) {
+                    score++;
+                }
+            }
+            const percentage = (score / totalQuestions) * 100;
+            let grade = '';
 
-                    // Highlight correct answer
-                    const correctLabel = optionsContainer.querySelector(`label[for="q${index}-option${correctAnswerIndex}"]`);
-                    if (correctLabel) {
-                        correctLabel.classList.add('correct-answer-highlight');
-                        // Add checkmark for correct
-                        correctLabel.innerHTML += `<span style="margin-left: 10px; font-weight: bold;">&#x2714;</span>`;
-                    }
+            if (percentage >= 90) {
+                grade = 'A+';
+            } else if (percentage >= 80) {
+                grade = 'A';
+            } else if (percentage >= 70) {
+                grade = 'B';
+            } else if (percentage >= 60) {
+                grade = 'C';
+            } else if (percentage >= 50) {
+                grade = 'D';
+            } else {
+                grade = 'F';
+            }
+            return { score, percentage, grade };
+        }
 
-                    // Highlight user's selected answer if wrong
-                    if (selectedOptionIndex !== null && selectedOptionIndex !== correctAnswerIndex) {
-                        const wrongLabel = optionsContainer.querySelector(`label[for="q${index}-option${selectedOptionIndex}"]`);
-                        if (wrongLabel) {
-                            wrongLabel.classList.add('wrong-answer-highlight');
-                            // Add cross mark for wrong
-                            wrongLabel.innerHTML += `<span style="margin-left: 10px; font-weight: bold;">&#x2718;</span>`;
+        function getGradeClass(grade) {
+            switch (grade) {
+                case 'A+': return 'grade-A-plus';
+                case 'A': return 'grade-A';
+                case 'B': return 'grade-B';
+                case 'C': return 'grade-C';
+                case 'D': return 'grade-D';
+                case 'F': return 'grade-F';
+                default: return '';
+            }
+        }
+
+        function displayResult() {
+            const { score, percentage, grade } = calculateScoreAndGrade();
+
+            resultSchoolName.textContent = schoolNameText;
+            resultClassSubject.textContent = classSubjectText;
+            resultStudentName.textContent = studentName;
+            resultRollNumber.textContent = rollNumber;
+            resultTotalQuestions.textContent = totalQuestions;
+            resultObtainedMarks.textContent = score;
+            resultPercentage.textContent = percentage.toFixed(2);
+            gradeDisplay.textContent = grade;
+            gradeDisplay.className = ''; // Clear previous classes
+            gradeDisplay.classList.add(getGradeClass(grade)); // Add dynamic class for color
+
+            feedbackDetailsContainer.innerHTML = ''; // Clear previous feedback
+
+            questions.forEach((q, index) => {
+                const feedbackItem = document.createElement('div');
+                feedbackItem.classList.add('feedback-item');
+
+                const questionTextFeedback = document.createElement('p');
+                questionTextFeedback.classList.add('question-text-feedback');
+                questionTextFeedback.textContent = `প্রশ্ন ${index + 1}: ${q.question}`;
+                feedbackItem.appendChild(questionTextFeedback);
+
+                q.options.forEach(option => {
+                    const optionDiv = document.createElement('div');
+                    optionDiv.classList.add('option-text');
+                    optionDiv.textContent = option;
+
+                    if (option === q.answer) {
+                        optionDiv.classList.add('correct');
+                        if (userAnswers[index] !== q.answer) {
+                             // If correct answer but user didn't select it or selected wrong
+                            optionDiv.classList.remove('correct'); // Remove green check if not selected by user
+                            optionDiv.classList.add('correct-unselected'); // Show as correct but not user's pick
                         }
                     }
-                }
+                    if (userAnswers[index] === option && userAnswers[index] !== q.answer) {
+                        optionDiv.classList.add('wrong');
+                        optionDiv.classList.add('selected-wrong'); // Add a specific class for user's wrong answer
+                    }
+                    feedbackItem.appendChild(optionDiv);
+                });
+                feedbackDetailsContainer.appendChild(feedbackItem);
             });
         }
 
-        function retryQuiz() {
-            // Reset state
-            userAnswers.fill(null);
-            studentNameInput.value = '';
-            rollNumberInput.value = '';
-            timeRemaining = timeLimitMinutes * 60;
-            clearInterval(timerInterval);
+        function downloadResultPdf() {
+            const element = document.getElementById('result-screen');
+            const opt = {
+                margin:       1,
+                filename:     `${studentName}_${rollNumber}_Quiz_Result.pdf`,
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, logging: true, dpi: 192, letterRendering: true },
+                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
 
-            // Hide result screen, show start screen
-            resultScreen.style.display = 'none';
-            startScreen.style.display = 'block';
-            nameError.style.display = 'none';
-            rollError.style.display = 'none';
-
-            // Clear highlights (will happen naturally as questions are re-rendered)
+            // Use html2pdf to generate and download the PDF
+            html2pdf().set(opt).from(element).save();
         }
-
-        function downloadResultPDF() {
-            // Use browser's print functionality to save as PDF
-            window.print();
-        }
-
-        // Initial display
-        startScreen.style.display = 'block';
-        quizScreen.style.display = 'none';
-        resultScreen.style.display = 'none';
-
     </script>
 </body>
 </html>
