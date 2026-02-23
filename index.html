@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<title>Board Question Paper</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<style>
+
+@page{
+  size:A4;
+  margin:20mm 18mm 25mm 18mm;
+}
+
+body{
+  font-family:"Noto Serif Bengali","Kalpurush","SolaimanLipi",serif;
+  background:#ddd;
+  padding:20px;
+}
+
+/* INPUT PANEL */
+.container{
+  max-width:900px;
+  margin:auto;
+  background:#fff;
+  padding:20px;
+}
+
+textarea{
+  width:100%;
+  height:260px;
+  padding:10px;
+  font-size:14px;
+}
+
+button{
+  padding:8px 16px;
+  font-size:14px;
+  margin-top:10px;
+}
+
+/* A4 PAPER */
+#a4{
+  width:210mm;
+  background:#fff;
+  padding:20mm 18mm 25mm 18mm;
+  display:none;
+  box-sizing:border-box;
+}
+
+/* HEADER */
+.school{
+  text-align:center;
+  font-size:20px;
+  font-weight:700;
+  color:#5aa9ff;
+}
+.exam{
+  text-align:center;
+  font-size:16px;
+  font-weight:700;
+  color:#5aa9ff;
+}
+.meta{
+  text-align:center;
+  font-size:13px;
+  color:#5aa9ff;
+}
+
+hr{
+  border:1.2px solid #000;
+  margin:16px 0;
+}
+
+/* SECTION TITLE */
+.section-title{
+  font-weight:700;
+  color:#5aa9ff;
+  margin-top:18px;
+  page-break-after:avoid;
+}
+
+/* QUESTION BLOCK */
+.qblock{
+  page-break-inside:avoid;
+  break-inside:avoid;
+}
+
+.line-short{
+  border-bottom:1px solid #000;
+  height:28px;
+  margin-bottom:4px;
+}
+
+.line-long{
+  border-bottom:1px solid #000;
+  height:26px;
+  margin-bottom:4px;
+}
+
+/* MATCH TABLE */
+.match-table{
+  width:100%;
+  border:1px solid #000;
+  margin-top:10px;
+  page-break-inside:avoid;
+}
+
+.match-row{
+  display:flex;
+  width:100%;
+}
+
+.match-cell{
+  width:50%;
+  border:1px solid #000;
+  padding:10px;
+  box-sizing:border-box;
+  vertical-align:top;
+}
+
+.match-header{
+  font-weight:bold;
+  text-align:center;
+}
+
+/* WATERMARK */
+.watermark{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  font-size:60px;
+  opacity:.05;
+  pointer-events:none;
+}
+
+/* PRINT */
+@media print{
+  body{background:#fff;}
+  .container,#pdfBtn{display:none;}
+  #a4{display:block;}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container" id="inputSection">
+<h3>AI Raw Input</h3>
+<textarea id="rawInput"></textarea>
+<br>
+<button onclick="generatePaper()">Generate</button>
+<button onclick="exportPDF()" id="pdfBtn" style="display:none;">Export PDF</button>
+</div>
+
+<div id="a4"></div>
+
+<script>
+
+function generatePaper(){
+
+let raw=document.getElementById("rawInput").value.trim();
+let lines=raw.split("\n");
+
+let school=lines[0]||"";
+let exam=lines[1]||"";
+let cls=lines[2]||"";
+let subject=lines[3]||"";
+
+let marksTime=(lines[4]||"").split(",");
+let fullMarks=marksTime[0]||"";
+let time=marksTime[1]||"";
+
+let mcq=[],fill=[],match=[],shortQ=[],longQ=[];
+let section="";
+
+for(let i=5;i<lines.length;i++){
+let line=lines[i].trim();
+
+if(line==="MCQ:"){section="mcq";continue;}
+if(line==="Fill:"){section="fill";continue;}
+if(line==="Match:"){section="match";continue;}
+if(line==="Short:"){section="short";continue;}
+if(line==="Long:"){section="long";continue;}
+
+if(section==="mcq" && line) mcq.push(line);
+if(section==="fill" && line) fill.push(line);
+if(section==="match" && line) match.push(line);
+if(section==="short" && line) shortQ.push(line);
+if(section==="long" && line) longQ.push(line);
+}
+
+document.getElementById("inputSection").style.display="none";
+
+let paper=document.getElementById("a4");
+paper.innerHTML="";
+paper.style.display="block";
+
+paper.innerHTML+=`
+<div class="watermark">Anowar Sir</div>
+<div class="school">${school}</div>
+<div class="exam">${exam}</div>
+<div class="meta">Class ${cls} &nbsp;&nbsp; Subject ${subject}</div>
+<div class="meta">Full Marks ${fullMarks} &nbsp;&nbsp; Time ${time}</div>
+<hr>
+`;
+
+/* MCQ */
+if(mcq.length){
+paper.innerHTML+=`<div class="section-title">১. সঠিক উত্তরটি বেছে নিয়ে লেখো: 1×${mcq.length}=${mcq.length}</div>`;
+mcq.forEach((q,i)=>{
+let p=q.split(",");
+paper.innerHTML+=`
+<div class="qblock">
+<p>1.${i+1} ${p[0]}</p>
+(ক) ${p[1]} (খ) ${p[2]} (গ) ${p[3]} (ঘ) ${p[4]}
+</div>`;
+});
+}
+
+/* Fill */
+if(fill.length){
+paper.innerHTML+=`<div class="section-title">২. শূন্যস্থান পূরণ করো: 1×${fill.length}=${fill.length}</div>`;
+fill.forEach((q,i)=>{
+paper.innerHTML+=`<div class="qblock"><p>2.${i+1} ${q}</p></div>`;
+});
+}
+
+/* Match */
+if(match.length){
+paper.innerHTML+=`
+<div class="section-title">
+৩. ‘ক’ স্তম্ভের সঙ্গে ‘খ’ স্তম্ভের সার্থক মিলন ঘটাও: 1×${match.length}=${match.length}
+</div>
+
+<div class="match-table">
+<div class="match-row">
+<div class="match-cell match-header">(ক)</div>
+<div class="match-cell match-header">(খ)</div>
+</div>
+<div class="match-row">
+<div class="match-cell" id="leftCol"></div>
+<div class="match-cell" id="rightCol"></div>
+</div>
+</div>
+`;
+
+let roman=["(i)","(ii)","(iii)","(iv)","(v)","(vi)","(vii)","(viii)"];
+let alpha=["A.","B.","C.","D.","E.","F.","G.","H."];
+
+let leftHTML="";
+let rightHTML="";
+
+match.forEach((q,i)=>{
+let p=q.split(",");
+leftHTML+=`<div style="margin-bottom:8px;">${roman[i]} ${p[0]}</div>`;
+rightHTML+=`<div style="margin-bottom:8px;">${alpha[i]} ${p[1]}</div>`;
+});
+
+document.getElementById("leftCol").innerHTML=leftHTML;
+document.getElementById("rightCol").innerHTML=rightHTML;
+}
+
+/* Short */
+if(shortQ.length){
+paper.innerHTML+=`<div class="section-title">৪. সংক্ষিপ্ত প্রশ্ন: 2×${shortQ.length}=${shortQ.length*2}</div>`;
+shortQ.forEach((q,i)=>{
+paper.innerHTML+=`<div class="qblock"><p>4.${i+1} ${q}</p>`;
+paper.innerHTML+=`<div class="line-short"></div><div class="line-short"></div></div>`;
+});
+}
+
+/* Long */
+if(longQ.length){
+paper.innerHTML+=`<div class="section-title">৫. রচনাধর্মী প্রশ্ন: 5×${longQ.length}=${longQ.length*5}</div>`;
+longQ.forEach((q,i)=>{
+paper.innerHTML+=`<div class="qblock"><p>5.${i+1} ${q}</p>`;
+for(let j=0;j<12;j++) paper.innerHTML+=`<div class="line-long"></div>`;
+paper.innerHTML+=`</div>`;
+});
+}
+
+document.getElementById("pdfBtn").style.display="inline-block";
+}
+
+/* PDF EXPORT */
+function exportPDF(){
+html2pdf().set({
+margin:[20,18,25,18],
+filename:'Board_Question_Paper.pdf',
+html2canvas:{scale:2},
+pagebreak:{mode:['css','legacy']},
+jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}
+}).from(document.getElementById("a4")).save();
+}
+
+</script>
+</body>
+</html>
