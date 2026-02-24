@@ -39,6 +39,7 @@ button{
   padding:8px 16px;
   font-size:14px;
   margin-top:10px;
+  margin-right:6px;
 }
 
 /* A4 PAPER */
@@ -48,6 +49,7 @@ button{
   padding:20mm 18mm 25mm 18mm;
   display:none;
   box-sizing:border-box;
+  position:relative;
 }
 
 /* HEADER */
@@ -118,7 +120,6 @@ hr{
   border:1px solid #000;
   padding:10px;
   box-sizing:border-box;
-  vertical-align:top;
 }
 
 .match-header{
@@ -140,7 +141,7 @@ hr{
 /* PRINT */
 @media print{
   body{background:#fff;}
-  .container,#pdfBtn{display:none;}
+  .container,#pdfBtn,#printBtn{display:none;}
   #a4{display:block;}
 }
 
@@ -154,6 +155,7 @@ hr{
 <textarea id="rawInput"></textarea>
 <br>
 <button onclick="generatePaper()">Generate</button>
+<button onclick="generateAndPrint()" id="printBtn">Print</button>
 <button onclick="exportPDF()" id="pdfBtn" style="display:none;">Export PDF</button>
 </div>
 
@@ -230,41 +232,6 @@ paper.innerHTML+=`<div class="qblock"><p>2.${i+1} ${q}</p></div>`;
 });
 }
 
-/* Match */
-if(match.length){
-paper.innerHTML+=`
-<div class="section-title">
-৩. ‘ক’ স্তম্ভের সঙ্গে ‘খ’ স্তম্ভের সার্থক মিলন ঘটাও: 1×${match.length}=${match.length}
-</div>
-
-<div class="match-table">
-<div class="match-row">
-<div class="match-cell match-header">(ক)</div>
-<div class="match-cell match-header">(খ)</div>
-</div>
-<div class="match-row">
-<div class="match-cell" id="leftCol"></div>
-<div class="match-cell" id="rightCol"></div>
-</div>
-</div>
-`;
-
-let roman=["(i)","(ii)","(iii)","(iv)","(v)","(vi)","(vii)","(viii)"];
-let alpha=["A.","B.","C.","D.","E.","F.","G.","H."];
-
-let leftHTML="";
-let rightHTML="";
-
-match.forEach((q,i)=>{
-let p=q.split(",");
-leftHTML+=`<div style="margin-bottom:8px;">${roman[i]} ${p[0]}</div>`;
-rightHTML+=`<div style="margin-bottom:8px;">${alpha[i]} ${p[1]}</div>`;
-});
-
-document.getElementById("leftCol").innerHTML=leftHTML;
-document.getElementById("rightCol").innerHTML=rightHTML;
-}
-
 /* Short */
 if(shortQ.length){
 paper.innerHTML+=`<div class="section-title">৪. সংক্ষিপ্ত প্রশ্ন: 2×${shortQ.length}=${shortQ.length*2}</div>`;
@@ -285,6 +252,14 @@ paper.innerHTML+=`</div>`;
 }
 
 document.getElementById("pdfBtn").style.display="inline-block";
+}
+
+/* GENERATE + PRINT */
+function generateAndPrint(){
+generatePaper();
+setTimeout(function(){
+window.print();
+},500);
 }
 
 /* PDF EXPORT */
